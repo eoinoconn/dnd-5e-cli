@@ -22,7 +22,7 @@ jobs:
           pip install -r requirements.txt
       - name: Lint with pylint
         run: |
-          pylint src/ --reports=yes --output=pylint-results-${{ matrix.python-version }}.txt
+          pylint src/ --reports=yes --output=pylint-results-${{ matrix.python-version }}.txt --exit-zero
       - name: Upload pylint test results
         uses: actions/upload-artifact@v2
         with:

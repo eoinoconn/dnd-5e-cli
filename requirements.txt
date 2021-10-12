@@ -1,2 +1,4 @@
 termcolor
 pylint
+pytest
+pytest-cov

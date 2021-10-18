@@ -23,14 +23,7 @@ jobs:
           pip install .
       - name: Lint with pylint
         run: |
-          pylint src/ --reports=yes --output=pylint-results-${{ matrix.python-version }}.txt --exit-zero
-      - name: Upload pylint test results
-        uses: actions/upload-artifact@v2
-        with:
-          name: pylint-results-${{ matrix.python-version }}
-          path: pylint-results-${{ matrix.python-version }}.txt
-        # Use always() to always run this step to publish test results when there are test failures
-        if: ${{ always() }}
+          pylint src/ --reports=yes --exit-zero --rcfile .pylintrc
       - name: Test with pytest
         run: pytest tests/ --doctest-modules --junitxml=junit/test-results-${{ matrix.python-version }}.xml --cov-report=xml --cov-report=term
       - name: Upload pytest test results

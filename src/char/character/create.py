@@ -1,17 +1,27 @@
-from logging import getLogger
+import logging
 
 from PyInquirer import prompt
 
 from char import fifth_edition
 
-LOGGER = getLogger(__name__)
+from .character import CharacterFactory
+
+logging.basicConfig(format='%(asctime)s %(message)s',
+                    datefmt='%m/%d/%Y %I:%M:%S %p')
+LOGGER = logging.getLogger(__name__)
+LOGGER.setLevel(logging.DEBUG)
+
 
 class CharacterCreator:
+
+    def create():
+        pass
 
     @staticmethod
     def create_from_cli():
         """
         """
+        print("Creating a new character...")
         questions = [
             {
                 'type': 'input',
@@ -22,20 +32,25 @@ class CharacterCreator:
                 'type': 'list',
                 'name': 'race',
                 'message': 'What\'s your race?',
-                'choices': fifth_edition.races
+                'choices': fifth_edition.races_list
             },
             {
                 'type': 'list',
                 'name': 'class',
                 'message': 'What\'s your class?',
-                'choices': fifth_edition.classes
+                'choices': fifth_edition.classes_list
             }
         ]
         answers = prompt(questions)
-        print(answers) 
-        
+        LOGGER.info(answers)
+
+        char = CharacterFactory.create_char(
+            answers["name"],
+            answers["race"],
+            answers["class"]
+        )
+        print(f"Created a new character: {char}")
+
 
 def execute(*args):
     CharacterCreator.create_from_cli()
-
-

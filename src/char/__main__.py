@@ -1,11 +1,14 @@
 import argparse
 from argparse import SUPPRESS
-from logging import getLogger
+import logging
 
 #from .. import __version__
 from .character.utils import configure_parser_create
 
-LOGGER = getLogger(__name__)
+logging.basicConfig(format='%(asctime)s %(message)s',
+                    datefmt='%m/%d/%Y %I:%M:%S %p')
+LOGGER = logging.getLogger(__name__)
+LOGGER.setLevel(logging.DEBUG)
 
 
 def main():
@@ -13,12 +16,12 @@ def main():
     parser = argparse.ArgumentParser(
         allow_abbrev=False,
         description='List the content of a folder',
-        )
+    )
 
     parser.add_argument(
         '-V', '--version',
         action='version',
-        #version= f"5e {__version__}", #TODO: fill in
+        # version= f"5e {__version__}", #TODO: fill in
         help="Show the conda version number and exit."
     )
 
@@ -39,7 +42,6 @@ def main():
 
     args = parser.parse_args()
     args.func(args)
-
 
 
 if __name__ == "__main__":

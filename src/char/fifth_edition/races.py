@@ -1,4 +1,6 @@
-races = [
+from abc import ABC, abstractmethod
+
+races_list = [
     "Dragonborn",
     "Dwarf",
     "Elf",
@@ -9,3 +11,25 @@ races = [
     "Human",
     "Tiefling"
 ]
+
+class Race(ABC):
+
+    @abstractmethod
+    def update_character():
+        pass
+
+    @abstractmethod
+    def update_ability_scores():
+        pass
+
+    @abstractmethod
+    def update_skills():
+        pass
+
+    @abstractmethod
+    def update_spells():
+        pass
+
+
+class Human:
+    pass

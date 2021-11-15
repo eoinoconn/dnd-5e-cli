@@ -1,8 +1,16 @@
-from char import fifth_edition
+"""
+Character class.
+"""
+
 
 class Character:
 
     def __init__(self, name):
+        """
+        Character class.
+
+        :param name: The name of the character.
+        """
         self.name = name
         self.race = None
         self.cls = None
@@ -30,18 +38,27 @@ class Character:
 
     @property
     def acrobatics(self):
+        """
+        Return the acrobatics modifier.
+        """
         if "acrobatics" in self.proficiencies:
             return self.dexterity + self.proficiency_bonus
         return self.dexterity
 
     @property
     def animal_handling(self):
+        """
+        Return the animal handling modifier.
+        """
         if "animal_handling" in self.proficiencies:
             return self.wisdom + self.proficiency_bonus
         return self.wisdom
 
     @property
     def arcana(self):
+        """
+        Return the arcana modifier.
+        """
         if "arcana" in self.proficiencies:
             return self.intelligence + self.proficiency_bonus
         return self.intelligence
@@ -185,6 +202,7 @@ class Character:
     def __str__(self):
         return self.name
 
+
 class CharacterFactory:
 
     @staticmethod
@@ -193,13 +211,11 @@ class CharacterFactory:
         char = Character(name)
 
         # TODO: add race
-        #fifth_edition.get_race[race].add_specifics(char)
+        # fifth_edition.get_race[race].add_specifics(char)
 
         # TODO: Add class specifics
-        #fifth_edition.get_class[cls].add_specifics(char)
+        # fifth_edition.get_class[cls].add_specifics(char)
 
         # TODO: Choose proficiences
 
-
         return char
-

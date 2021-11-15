@@ -1,3 +1,6 @@
+"""
+Module for creating a character.
+"""
 import logging
 
 from PyInquirer import prompt
@@ -13,6 +16,9 @@ LOGGER.setLevel(logging.DEBUG)
 
 
 class CharacterCreator:
+    """
+    Character creator class.
+    """
 
     def create():
         pass
@@ -20,6 +26,7 @@ class CharacterCreator:
     @staticmethod
     def create_from_cli():
         """
+        Create a character from the command line.
         """
         print("Creating a new character...")
         questions = [
@@ -53,4 +60,7 @@ class CharacterCreator:
 
 
 def execute(*args):
+    """
+    Creates character from command line.
+    """
     CharacterCreator.create_from_cli()

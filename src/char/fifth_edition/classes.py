@@ -1,3 +1,6 @@
+"""
+Character classes.
+"""
 from abc import ABC, abstractmethod
 
 classes_list = [
@@ -17,6 +20,15 @@ classes_list = [
 
 
 def get_class(class_str):
+    """
+    Get a class by name.
+
+    :param class_str: The name of the class.
+
+    :return: The class.
+
+    :raises: ValueError if the class is not found.
+    """
     if class_str == "Barbarian":
         return Barbarian()
     else:
@@ -24,10 +36,13 @@ def get_class(class_str):
 
 
 class Class(ABC):
+    """
+    Class parent class.
+    """
 
-    def update_character(character):
+    @abstractmethod
+    def update_character(self, char):
         pass
-
 
     @abstractmethod
     def update_ability_scores():
@@ -42,12 +57,18 @@ class Class(ABC):
         pass
 
 class Barbarian(Class):
+    """
+    Barbarian class.
+    """
 
-    def update_ability_scores(self):
+    @staticmethod
+    def update_ability_scores():
         pass
 
-    def update_skills(self):
+    @staticmethod
+    def update_skills():
         pass
 
-    def update_spells(self):
+    @staticmethod
+    def update_spells():
         pass

@@ -1,3 +1,6 @@
+"""
+Character Races.
+"""
 from abc import ABC, abstractmethod
 
 races_list = [

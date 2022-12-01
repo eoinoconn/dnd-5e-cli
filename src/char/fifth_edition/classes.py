@@ -60,6 +60,9 @@ class Barbarian(Class):
     """
     Barbarian class.
     """
+    @staticmethod
+    def update_character(self, char):
+        pass
 
     @staticmethod
     def update_ability_scores():

@@ -12,7 +12,7 @@ def test_single_roll(mockobject, capsys):
     mockobject.assert_called()
 
 
-    assert out == '5\n\x1b[32m= 5\x1b[0m\n'
+    assert out == '5\n= 5\n'
 
     mockobject.return_value = 2
     
@@ -20,7 +20,7 @@ def test_single_roll(mockobject, capsys):
 
     mockobject.assert_called()
 
-    assert out == '2\n\x1b[32m= 2\x1b[0m\n'
+    assert out == '2\n= 2\n'
 
 @patch("random.randint")
 def test_multiple_rolls(mockobject, capsys):
@@ -31,4 +31,4 @@ def test_multiple_rolls(mockobject, capsys):
 
     mockobject.assert_called()
 
-    assert out == '5 + 5 + 5 + 5 + 5\n\x1b[32m= 25\x1b[0m\n'
+    assert out == '5 + 5 + 5 + 5 + 5\n= 25\n'

@@ -3,7 +3,8 @@ from argparse import SUPPRESS
 import logging
 
 #from .. import __version__
-from .character.utils import configure_parser_create
+from .character.create import configure_parser_create
+from .character.utils import create_dir_structure
 
 logging.basicConfig(format='%(asctime)s %(message)s',
                     datefmt='%m/%d/%Y %I:%M:%S %p')
@@ -13,16 +14,19 @@ LOGGER.setLevel(logging.DEBUG)
 
 def main():
 
+    # establish configuration directory.
+    create_dir_structure()
+
     parser = argparse.ArgumentParser(
         allow_abbrev=False,
-        description='List the content of a folder',
+        description='Command to create and manage your characters.',
     )
 
     parser.add_argument(
         '-V', '--version',
         action='version',
         # version= f"5e {__version__}", #TODO: fill in
-        help="Show the conda version number and exit."
+        help="Show the 5e_cli version number and exit."
     )
 
     parser.add_argument(

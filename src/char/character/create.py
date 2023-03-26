@@ -4,6 +4,7 @@ Module for creating a character.
 import logging
 
 from PyInquirer import prompt
+from textwrap import dedent
 
 from char import fifth_edition
 
@@ -92,3 +93,21 @@ def execute(*args):
     Creates character from command line.
     """
     CharacterCreator.create_from_cli()
+
+
+def configure_parser_create(sub_parser) -> None:
+    help = ""
+    descr = (help + "") #TODO: Fill this in
+
+    example = dedent("""
+    Examples:
+        char create
+    """)
+    parser = sub_parser.add_parser(
+        'create',
+        description=descr,
+        help=help,
+        epilog=example,
+    )
+
+    parser.set_defaults(func=execute)

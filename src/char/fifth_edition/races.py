@@ -9,8 +9,8 @@ races_list = [
     "Elf",
     "Gnome",
     "Half-Elf",
-    "Halfling"
-    "Half-Orc"
+    "Halfling",
+    "Half-Orc",
     "Human",
     "Tiefling"
 ]
@@ -35,4 +35,25 @@ class Race(ABC):
 
 
 class Human:
-    pass
+    
+    @classmethod
+    def update_character(self, char):
+
+        char.race = "Human"
+        
+
+    @abstractmethod
+    def update_ability_scores():
+        pass
+
+    @abstractmethod
+    def update_skills():
+        pass
+
+    @abstractmethod
+    def update_spells():
+        pass
+
+races = {
+    "Human": Human
+}

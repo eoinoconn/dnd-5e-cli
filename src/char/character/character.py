@@ -1,7 +1,11 @@
 """
 Character class.
 """
+import json
+import os
 
+from char import fifth_edition
+from .utils import CHAR_SAVE_PATH
 
 class Character:
 
@@ -199,6 +203,11 @@ class Character:
 
         return hit_points_max
 
+    def save(self, save_dir):
+        save_path = os.path.join(save_dir, self.name + ".json")
+        with open(save_path, "w") as f:
+            json.dump(self.__dict__, f)
+
     def __str__(self):
         return self.name
 
@@ -211,11 +220,13 @@ class CharacterFactory:
         char = Character(name)
 
         # TODO: add race
-        # fifth_edition.get_race[race].add_specifics(char)
+        fifth_edition.races[race].update_character(char)
 
         # TODO: Add class specifics
-        # fifth_edition.get_class[cls].add_specifics(char)
+        #fifth_edition.get_class[cls].update_character(char)
 
         # TODO: Choose proficiences
+
+        char.save(CHAR_SAVE_PATH)
 
         return char

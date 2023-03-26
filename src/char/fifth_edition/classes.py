@@ -60,7 +60,13 @@ class Barbarian(Class):
     """
     Barbarian class.
     """
+    @classmethod
     def update_character(self, char):
+        """
+        Update the character with the barbarian class.
+        
+        :param char: The character to update.
+        """
         char.cls = "Barbarian"
 
         self.update_ability_scores()
@@ -78,3 +84,7 @@ class Barbarian(Class):
     @staticmethod
     def update_spells():
         pass
+
+classes = {
+    "Barbarian": Barbarian,
+}

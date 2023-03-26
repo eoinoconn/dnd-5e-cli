@@ -223,7 +223,7 @@ class CharacterFactory:
         fifth_edition.races[race].update_character(char)
 
         # TODO: Add class specifics
-        #fifth_edition.get_class[cls].update_character(char)
+        fifth_edition.classes[cls].update_character(char)
 
         # TODO: Choose proficiences
 

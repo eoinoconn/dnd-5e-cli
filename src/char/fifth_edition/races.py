@@ -15,6 +15,7 @@ races_list = [
     "Tiefling"
 ]
 
+
 class Race(ABC):
 
     @abstractmethod
@@ -34,13 +35,11 @@ class Race(ABC):
         pass
 
 
-class Human:
-    
-    @classmethod
-    def update_character(self, char):
+class Human(Race):
 
+    @classmethod
+    def update_character(char):
         char.race = "Human"
-        
 
     @abstractmethod
     def update_ability_scores():
@@ -54,6 +53,25 @@ class Human:
     def update_spells():
         pass
 
+
+class Dragonborn(Race):
+
+    @staticmethod
+    def update_character(char):
+        char.race = "Dragonborn"
+
+    def update_ability_scores(self, char):
+        char.ability_scores["Strength"] += 2
+        char.ability_scores["Charisma"] += 1
+
+    def update_skills(self, char):
+        pass
+
+    def update_spells(self, char):
+        pass
+
+
 races = {
-    "Human": Human
+    "Human": Human,
+    "Dragonborn": Dragonborn,
 }

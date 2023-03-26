@@ -38,36 +38,40 @@ class Race(ABC):
 class Human(Race):
 
     @classmethod
-    def update_character(char):
+    def update_character(self, char):
         char.race = "Human"
 
-    @abstractmethod
+        self.update_ability_scores()
+        self.update_skills()
+        self.update_spells()
+
     def update_ability_scores():
         pass
 
-    @abstractmethod
     def update_skills():
         pass
 
-    @abstractmethod
     def update_spells():
         pass
 
 
 class Dragonborn(Race):
 
-    @staticmethod
-    def update_character(char):
+    @classmethod
+    def update_character(self, char):
         char.race = "Dragonborn"
 
-    def update_ability_scores(self, char):
-        char.ability_scores["Strength"] += 2
-        char.ability_scores["Charisma"] += 1
+        self.update_ability_scores(char)
+        self.update_skills(char)
+        self.update_spells(char)
 
-    def update_skills(self, char):
+    def update_ability_scores(char):
         pass
 
-    def update_spells(self, char):
+    def update_skills(char):
+        pass
+
+    def update_spells(char):
         pass
 
 

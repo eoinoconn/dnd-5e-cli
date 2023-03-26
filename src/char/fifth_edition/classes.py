@@ -69,20 +69,17 @@ class Barbarian(Class):
         """
         char.cls = "Barbarian"
 
-        self.update_ability_scores()
-        self.update_skills()
-        self.update_spells()
+        self.update_ability_scores(char)
+        self.update_skills(char)
+        self.update_spells(char)
 
-    @staticmethod
-    def update_ability_scores():
+    def update_ability_scores(char):
         pass
 
-    @staticmethod
-    def update_skills():
+    def update_skills(char):
         pass
 
-    @staticmethod
-    def update_spells():
+    def update_spells(char):
         pass
 
 classes = {

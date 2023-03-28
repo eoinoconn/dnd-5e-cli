@@ -1,0 +1,5 @@
+termcolor
+pylint
+pytest
+pytest-cov
+PyInquirer

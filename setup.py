@@ -1,14 +1,14 @@
 import setuptools
 
 setuptools.setup(
-    name="example-pkg-YOUR-USERNAME-HERE",
+    name="dnd-5e-cli",
     version="0.0.1",
-    author="Example Author",
-    author_email="author@example.com",
-    description="A small example package",
-    url="https://github.com/pypa/sampleproject",
+    author="Eoin OConnell",
+    author_email="eoinoconn@gmail.com",
+    description="A simple DnD CLI tool.",
+    url="https://github.com/eoinoconn/dnd-5e-cli",
     project_urls={
-        "Bug Tracker": "https://github.com/pypa/sampleproject/issues",
+        "Bug Tracker": "https://github.com/eoinoconn/dnd-5e-cli/issues",
     },
     classifiers=[
         "Programming Language :: Python :: 3",

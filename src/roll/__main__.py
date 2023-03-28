@@ -1,12 +1,11 @@
 import sys
-from .roll import roll_
+from .roll_dice import roll
 
 def main():
-    print(sys.argv)
     
     for dice in sys.argv[1:]:
         print(dice)
-        roll_(dice)
+        print(roll(dice))
 
 if __name__ == "__main__":
     main()

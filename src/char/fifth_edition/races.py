@@ -61,8 +61,147 @@ class Dragonborn(Race):
     def update_spells(char):
         pass
 
+class Dwarf(Race):
+
+    @classmethod
+    def update_character(self, char):
+        char.race = "Dwarf"
+
+        self.update_ability_scores(char)
+        self.update_skills(char)
+        self.update_spells(char)
+
+    def update_ability_scores(char):
+        pass
+
+    def update_skills(char):
+        pass
+
+    def update_spells(char):
+        pass
+
+class Elf(Race):
+
+    @classmethod
+    def update_character(char):
+        char.race = "Elf"
+
+        self.update_ability_scores(char)
+        self.update_skills(char)
+        self.update_spells(char)
+
+    def update_ability_scores(char):
+        pass
+
+    def update_skills(char):
+        pass
+
+    def update_spells(char):
+        pass
+
+class Gnome(Race):
+
+    @classmethod
+    def update_character(self, char):
+        char.race = "Gnome"
+
+        self.update_ability_scores(char)
+        self.update_skills(char)
+        self.update_spells(char)
+
+    def update_ability_scores(char):
+        pass
+
+    def update_skills(char):
+        pass
+
+    def update_spells(char):
+        pass
+
+class HalfElf(Race):
+
+    @classmethod
+    def update_character(self, char):
+        char.race = "Half-Elf"
+
+        self.update_ability_scores(char)
+        self.update_skills(char)
+        self.update_spells(char)
+
+    def update_ability_scores(char):
+        pass
+
+    def update_skills(char):
+        pass
+
+    def update_spells(char):
+        pass
+
+class Halfling(Race):
+
+    @classmethod
+    def update_character(self, char):
+        char.race = "Halfling"
+
+        self.update_ability_scores(char)
+        self.update_skills(char)
+        self.update_spells(char)
+
+    def update_ability_scores(char):
+        pass
+
+    def update_skills(char):
+        pass
+
+    def update_spells(char):
+        pass
+
+class HalfOrc(Race):
+
+    @classmethod
+    def update_character(self, char):
+        char.race = "Half-Orc"
+
+        self.update_ability_scores(char)
+        self.update_skills(char)
+        self.update_spells(char)
+
+    def update_ability_scores(char):
+        pass
+
+    def update_skills(char):
+        pass
+
+    def update_spells(char):
+        pass
+
+class Tiefling(Race):
+
+    @classmethod
+    def update_character(self, char):
+        char.race = "Tiefling"
+
+        self.update_ability_scores(char)
+        self.update_skills(char)
+        self.update_spells(char)
+
+    def update_ability_scores(char):
+        pass
+
+    def update_skills(char):
+        pass
+
+    def update_spells(char):
+        pass
 
 races = {
     "Human": Human,
     "Dragonborn": Dragonborn,
+    "Dwarf": Dwarf,
+    "Elf": Elf,
+    "Gnome": Gnome,
+    "Half-Elf": HalfElf,
+    "Halfling": Halfling,
+    "Half-Orc": HalfOrc,
+    "Tiefling": Tiefling
 }

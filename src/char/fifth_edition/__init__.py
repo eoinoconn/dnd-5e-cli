@@ -1,2 +1,2 @@
-from .races import races_list
-from .classes import classes_list
+from .races import races_list, races
+from .classes import classes_list, classes

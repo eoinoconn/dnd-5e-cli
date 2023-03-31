@@ -9,8 +9,8 @@ races_list = [
     "Elf",
     "Gnome",
     "Half-Elf",
-    "Halfling"
-    "Half-Orc"
+    "Halfling",
+    "Half-Orc",
     "Human",
     "Tiefling"
 ]
@@ -34,5 +34,47 @@ class Race(ABC):
         pass
 
 
-class Human:
-    pass
+class Human(Race):
+
+    @classmethod
+    def update_character(self, char):
+        char.race = "Human"
+
+        self.update_ability_scores()
+        self.update_skills()
+        self.update_spells()
+
+    def update_ability_scores():
+        pass
+
+    def update_skills():
+        pass
+
+    def update_spells():
+        pass
+
+
+class Dragonborn(Race):
+
+    @classmethod
+    def update_character(self, char):
+        char.race = "Dragonborn"
+
+        self.update_ability_scores(char)
+        self.update_skills(char)
+        self.update_spells(char)
+
+    def update_ability_scores(char):
+        pass
+
+    def update_skills(char):
+        pass
+
+    def update_spells(char):
+        pass
+
+
+races = {
+    "Human": Human,
+    "Dragonborn": Dragonborn,
+}

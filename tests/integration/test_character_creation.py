@@ -5,8 +5,8 @@ from char import fifth_edition
 
 user_entrys = [
     {'name': 'eoin'},
-    {'race': fifth_edition.races_list[0]},
-    {'class': fifth_edition.classes_list[0]}
+    {'race': list(fifth_edition.races.keys())[0]},
+    {'class': list(fifth_edition.classes.keys())[0]}
 ]
 
 @patch('char.character.create.prompt', side_effect=user_entrys)

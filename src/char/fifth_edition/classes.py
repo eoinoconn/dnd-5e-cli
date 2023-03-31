@@ -3,22 +3,8 @@ Character classes.
 """
 from abc import ABC, abstractmethod
 
-classes_list = [
-    "Barbarian",
-    "Bard",
-    "Cleric",
-    "Druid",
-    "Fighter",
-    "Monk",
-    "Paladin",
-    "Ranger",
-    "Rogue",
-    "Sorcerer",
-    "Warlock",
-    "Wizard"
-]
 
-
+#TODO: is this needed?
 def get_class(class_str):
     """
     Get a class by name.

@@ -1,7 +1,9 @@
+from unittest.mock import patch
+
 from char.character.character import CharacterFactory
 
-
-def test_characterfactory():
+@patch('char.character.character.Character.save')
+def test_characterfactory(*args):
 
     char_name = "name"
 

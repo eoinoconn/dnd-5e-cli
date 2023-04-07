@@ -1,5 +1,6 @@
 from unittest.mock import patch
 
+from char.character import character
 from char.character.create import CharacterCreator
 from char import fifth_edition
 
@@ -10,7 +11,8 @@ user_entrys = [
 ]
 
 @patch('char.character.create.prompt', side_effect=user_entrys)
-def test_character_creator(input):
+@patch('char.character.character.Character.save')
+def test_character_creator(save_patch, promt_patch):
     """
     Test simple character creation.
     """

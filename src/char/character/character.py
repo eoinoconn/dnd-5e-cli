@@ -5,7 +5,10 @@ import json
 import os
 
 from char import fifth_edition
-from .utils import CHAR_SAVE_PATH
+from .utils import (
+    CHAR_SAVE_PATH, check_char_name,
+    check_if_char_exists, get_char_save_file_name)
+
 
 class Character:
 
@@ -204,7 +207,14 @@ class Character:
         return hit_points_max
 
     def save(self, save_dir):
-        save_path = os.path.join(save_dir, self.name + ".json")
+        if not check_char_name(self.name):
+            raise ValueError(
+                "Character name invalid.\n Must be under 30 characters and not contain any special characters.")
+
+        save_path = get_char_save_file_name(save_dir, self.name)
+
+        check_if_char_exists(save_path)
+
         with open(save_path, "w") as f:
             json.dump(self.__dict__, f)
 

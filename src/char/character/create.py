@@ -40,11 +40,16 @@ class CharacterCreator:
 
         LOGGER.debug(character_rep)
 
-        char = CharacterFactory.create_char(
-            character_rep["name"],
-            character_rep["race"],
-            character_rep["class"]
-        )
+        try:
+            char = CharacterFactory.create_char(
+                character_rep["name"],
+                character_rep["race"],
+                character_rep["class"]
+            )
+        except ValueError as e:
+            LOGGER.warning("Failed to create character: {}", e)
+            return
+
 
         # TODO: save character to disk.
 
@@ -88,13 +93,6 @@ class CharacterCreator:
             })
 
 
-def execute(*args):
-    """
-    Creates character from command line.
-    """
-    CharacterCreator.create_from_cli()
-
-
 def configure_parser_create(sub_parser) -> None:
     help = ""
     descr = (help + "") #TODO: Fill this in
@@ -110,4 +108,4 @@ def configure_parser_create(sub_parser) -> None:
         epilog=example,
     )
 
-    parser.set_defaults(func=execute)
+    parser.set_defaults(func=CharacterCreator.create_from_cli())

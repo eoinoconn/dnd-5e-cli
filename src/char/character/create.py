@@ -47,7 +47,8 @@ class CharacterCreator:
                 character_rep["class"]
             )
         except ValueError as e:
-            LOGGER.warning("Failed to create character: {}", e)
+            LOGGER.error(f"Failed to create character: {character_rep['name']}")
+            LOGGER.error(e)
             return
 
 
@@ -55,7 +56,7 @@ class CharacterCreator:
 
         print(f"Welcome {char.name}")
 
-        return char
+        return
 
     @staticmethod
     def ask_for_char_name():

@@ -45,7 +45,7 @@ def main():
     configure_parser_create(sub_parsers)
 
     args = parser.parse_args()
-    args.func(args)
+    #args.func(args) TODO: fix this
 
 
 if __name__ == "__main__":

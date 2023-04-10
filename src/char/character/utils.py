@@ -70,3 +70,14 @@ def get_char_save_file_name(save_dir, char_name):
     """
     return os.path.join(save_dir, char_name.replace(" ", "_")) + ".json"
 
+def get_char_save_file_names(save_dir: str = CHAR_SAVE_PATH):
+    """
+    Returns a list of all character save files in the given directory.
+
+    Args:
+        save_dir (str): Directory to search for character save files.
+    
+    Returns:
+        list: List of character save files.
+    """
+    return [os.path.join(save_dir, f) for f in os.listdir(save_dir) if os.path.isfile(os.path.join(save_dir, f))]

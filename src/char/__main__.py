@@ -4,6 +4,7 @@ import logging
 
 #from .. import __version__
 from .character.create import configure_parser_create
+from .character.list import configure_parser_list
 from .character.utils import create_dir_structure
 
 logging.basicConfig(format='%(asctime)s %(message)s',
@@ -43,6 +44,7 @@ def main():
     sub_parsers.required = True
 
     configure_parser_create(sub_parsers)
+    configure_parser_list(sub_parsers)
 
     args = parser.parse_args()
     args.func(args)

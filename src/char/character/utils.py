@@ -70,7 +70,7 @@ def get_char_save_file_name(save_dir, char_name):
     """
     return os.path.join(save_dir, char_name.replace(" ", "_")) + ".json"
 
-def get_char_save_file_names(save_dir: str = CHAR_SAVE_PATH):
+def get_char_save_files(save_dir: str = CHAR_SAVE_PATH):
     """
     Returns a list of all character save files in the given directory.
 

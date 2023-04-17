@@ -33,21 +33,6 @@ TEST_CHAR_JSON = {
 
 class TestCharacterFactory(TestCase):
 
-    def setup_char_json(self):
-        """
-        Save a character json file for testing.
-        """
-        char_path = os.path.join(CHAR_SAVE_PATH, TEST_CHAR_JSON["name"] + ".json")
-        with open(char_path, "w") as f:
-            json.dump(TEST_CHAR_JSON, f)
-
-    def teardown_char_json(self):
-        """
-        Delete character json file
-        """
-        char_path = os.path.join(CHAR_SAVE_PATH, TEST_CHAR_JSON["name"] + ".json")
-        os.remove(char_path)
-
     def test_create_char(self):
 
         with tempfile.TemporaryDirectory() as temp_dir:

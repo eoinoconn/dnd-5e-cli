@@ -4,7 +4,7 @@ import logging
 from typing import List
 import json
 
-from char.character.utils import get_char_save_file_names, CHAR_SAVE_PATH
+from char.character.utils import get_char_save_files, CHAR_SAVE_PATH
 
 def main(args: argparse.Namespace):
     """List characters."""
@@ -15,7 +15,7 @@ def main(args: argparse.Namespace):
         print('Verbose output.')
         print(f"{'name':30}{'Level':12}{'race':12}{'class':12}")
 
-    for json_file in get_char_save_file_names(CHAR_SAVE_PATH):
+    for json_file in get_char_save_files(CHAR_SAVE_PATH):
         # open json file
         with open(json_file, 'r') as f:
             # load json file

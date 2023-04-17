@@ -25,7 +25,7 @@ class CharacterCreator:
         pass
 
     @classmethod
-    def create_from_cli(self, args):
+    def create_from_cli(self, *args):
         """
         Create a character from the command line.
         """

@@ -5,7 +5,6 @@ import json
 import os
 
 from char.character.character import CharacterFactory
-from char.character.utils import CHAR_SAVE_PATH
 
 # Test character representation
 TEST_CHAR_JSON = {
@@ -31,6 +30,7 @@ TEST_CHAR_JSON = {
     "spells": [],
 }
 
+
 class TestCharacterFactory(TestCase):
 
     def test_create_char(self):
@@ -38,12 +38,13 @@ class TestCharacterFactory(TestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             with patch('char.character.character.CHAR_SAVE_PATH', temp_dir):
                 char = CharacterFactory.create_char(
-                    TEST_CHAR_JSON['name'], 
-                    TEST_CHAR_JSON['race'], 
+                    TEST_CHAR_JSON['name'],
+                    TEST_CHAR_JSON['race'],
                     TEST_CHAR_JSON['cls']
-                    )
+                )
 
-                self.assertTrue(os.path.exists(os.path.join(temp_dir, TEST_CHAR_JSON['name'] + ".json")))
+                self.assertTrue(os.path.exists(os.path.join(
+                    temp_dir, TEST_CHAR_JSON['name'] + ".json")))
 
         self.assertEqual(str(char), TEST_CHAR_JSON["name"])
         self.assertEqual(char.race, TEST_CHAR_JSON['race'])
@@ -56,7 +57,7 @@ class TestCharacterFactory(TestCase):
         """
         args = [
             "Gand@lf the Grey",
-            TEST_CHAR_JSON['race'], 
+            TEST_CHAR_JSON['race'],
             TEST_CHAR_JSON['cls']]
 
         self.assertRaises(ValueError, CharacterFactory.create_char, *args)
@@ -68,7 +69,7 @@ class TestCharacterFactory(TestCase):
         """
         args = [
             "Gandalf the Grey also known as the white wizard",
-            TEST_CHAR_JSON['race'], 
+            TEST_CHAR_JSON['race'],
             TEST_CHAR_JSON['cls']]
 
         self.assertRaises(ValueError, CharacterFactory.create_char, *args)
@@ -80,7 +81,7 @@ class TestCharacterFactory(TestCase):
         """
         args = [
             "",
-            TEST_CHAR_JSON['race'], 
+            TEST_CHAR_JSON['race'],
             TEST_CHAR_JSON['cls']]
 
         self.assertRaises(ValueError, CharacterFactory.create_char, *args)
@@ -88,13 +89,12 @@ class TestCharacterFactory(TestCase):
     def test_char_already_exists(self, *args):
         args = [
             TEST_CHAR_JSON['name'],
-            TEST_CHAR_JSON['race'], 
+            TEST_CHAR_JSON['race'],
             TEST_CHAR_JSON['cls']]
 
         with tempfile.TemporaryDirectory() as temp_dir:
             with patch('char.character.character.CHAR_SAVE_PATH', temp_dir):
                 char = CharacterFactory.create_char(*args)
 
-                self.assertRaises(ValueError, CharacterFactory.create_char, *args)
-
-
+                self.assertRaises(
+                    ValueError, CharacterFactory.create_char, *args)

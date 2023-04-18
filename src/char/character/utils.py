@@ -11,6 +11,7 @@ LOGGER.setLevel(logging.DEBUG)
 SAVE_PATH = os.path.join(str(Path.home()), ".5e_cli")
 CHAR_SAVE_PATH = os.path.join(SAVE_PATH, "chars")
 
+
 def create_dir_structure():
     """
     Creates fodler necessary for cli character saving.
@@ -19,8 +20,10 @@ def create_dir_structure():
         if not os.path.isdir(CHAR_SAVE_PATH):
             os.mkdir(CHAR_SAVE_PATH)
     except (FileExistsError, FileNotFoundError) as e:
-        LOGGER.warning("Failed to create directory {} for 5e CLI", CHAR_SAVE_PATH)
+        LOGGER.warning(
+            "Failed to create directory {} for 5e CLI", CHAR_SAVE_PATH)
         raise e
+
 
 def check_if_char_exists(char_save_file):
     """
@@ -28,6 +31,7 @@ def check_if_char_exists(char_save_file):
     """
     if os.path.isfile(char_save_file):
         raise ValueError("Character already exists.")
+
 
 def check_char_name(char_name):
     """
@@ -42,7 +46,7 @@ def check_char_name(char_name):
 
     Args:
         char_name (str): Character name.
-    
+
     Returns:
         bool: True if character name is valid, False otherwise.
     """
@@ -56,6 +60,7 @@ def check_char_name(char_name):
         return False
     return True
 
+
 def get_char_save_file_name(save_dir, char_name):
     """
     Returns file name friendly version of the character 
@@ -64,11 +69,12 @@ def get_char_save_file_name(save_dir, char_name):
 
     Args:
         char_name (str): Character name.
-    
+
     Returns:
         str: File name friendly version of the character name.
     """
     return os.path.join(save_dir, char_name.replace(" ", "_")) + ".json"
+
 
 def get_char_save_files(save_dir: str = CHAR_SAVE_PATH):
     """
@@ -76,7 +82,7 @@ def get_char_save_files(save_dir: str = CHAR_SAVE_PATH):
 
     Args:
         save_dir (str): Directory to search for character save files.
-    
+
     Returns:
         list: List of character save files.
     """

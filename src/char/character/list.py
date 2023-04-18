@@ -11,11 +11,16 @@ def main(args: argparse.Namespace):
     logging.debug('List characters.')
     print('List characters.')
 
+    char_files = get_char_save_files(CHAR_SAVE_PATH)
+    if not char_files:
+        print("No characters found.")
+        return
+
     if args.verbose:
         print('Verbose output.')
-        print(f"{'name':30}{'Level':12}{'race':12}{'class':12}")
+        print(f"{'name':30}{'Level':<6}{'race':12}{'class':12}")
 
-    for json_file in get_char_save_files(CHAR_SAVE_PATH):
+    for json_file in char_files:
         # open json file
         with open(json_file, 'r') as f:
             # load json file
@@ -24,7 +29,7 @@ def main(args: argparse.Namespace):
                 # print character name
                 print(char_json['name'])
             else:
-                print(f"{char_json['name']:30}{char_json['level']:12}{char_json['race']:12}{char_json['cls']:12}")
+                print(f"{char_json['name']:30}{char_json['level']:<6}{char_json['race']:12}{char_json['cls']:12}")
 
 
 

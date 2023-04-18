@@ -25,7 +25,7 @@ class CharacterCreator:
         pass
 
     @classmethod
-    def create_from_cli(self):
+    def create_from_cli(self, *args):
         """
         Create a character from the command line.
         """
@@ -109,4 +109,4 @@ def configure_parser_create(sub_parser) -> None:
         epilog=example,
     )
 
-    parser.set_defaults(func=CharacterCreator.create_from_cli())
+    parser.set_defaults(func=CharacterCreator.create_from_cli)

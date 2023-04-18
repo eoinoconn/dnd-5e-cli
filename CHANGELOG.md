@@ -12,3 +12,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CD workflow
 - pylintrc file
 - Add basic character creation
+- Add spec document for CLI
+- Implement List command

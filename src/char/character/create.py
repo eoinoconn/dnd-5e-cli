@@ -25,7 +25,7 @@ class CharacterCreator:
         pass
 
     @classmethod
-    def create_from_cli(self):
+    def create_from_cli(self, *args):
         """
         Create a character from the command line.
         """
@@ -40,15 +40,21 @@ class CharacterCreator:
 
         LOGGER.debug(character_rep)
 
-        char = CharacterFactory.create_char(
-            character_rep["name"],
-            character_rep["race"],
-            character_rep["class"]
-        )
+        try:
+            char = CharacterFactory.create_char(
+                character_rep["name"],
+                character_rep["race"],
+                character_rep["class"]
+            )
+        except ValueError as e:
+            LOGGER.error(f"Failed to create character: {character_rep['name']}")
+            LOGGER.error(e)
+            return
+
 
         print(f"Welcome {char.name}")
 
-        return char
+        return
 
     @staticmethod
     def ask_for_char_name():
@@ -86,13 +92,6 @@ class CharacterCreator:
             })
 
 
-def execute(*args):
-    """
-    Creates character from command line.
-    """
-    CharacterCreator.create_from_cli()
-
-
 def configure_parser_create(sub_parser) -> None:
     help = ""
     descr = (help + "") #TODO: Fill this in
@@ -108,4 +107,4 @@ def configure_parser_create(sub_parser) -> None:
         epilog=example,
     )
 
-    parser.set_defaults(func=execute)
+    parser.set_defaults(func=CharacterCreator.create_from_cli)

@@ -52,8 +52,6 @@ class CharacterCreator:
             return
 
 
-        # TODO: save character to disk.
-
         print(f"Welcome {char.name}")
 
         return
@@ -78,7 +76,7 @@ class CharacterCreator:
             'type': 'list',
             'name': 'race',
             'message': 'What\'s your race?',
-            'choices': fifth_edition.races_list
+            'choices': fifth_edition.races.keys()
             })
 
     @staticmethod
@@ -90,7 +88,7 @@ class CharacterCreator:
             'type': 'list',
             'name': 'class',
             'message': 'What\'s your class?',
-            'choices': fifth_edition.classes_list
+            'choices': fifth_edition.classes.keys()
             })
 
 

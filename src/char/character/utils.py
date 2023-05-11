@@ -11,7 +11,6 @@ LOGGER.setLevel(logging.DEBUG)
 SAVE_PATH = os.path.join(str(Path.home()), ".5e_cli")
 CHAR_SAVE_PATH = os.path.join(SAVE_PATH, "chars")
 
-
 def create_dir_structure():
     """
     Creates fodler necessary for cli character saving.

@@ -2,6 +2,7 @@ import os
 import logging
 from pathlib import Path
 import regex as re
+import shutil
 
 logging.basicConfig(format='%(asctime)s %(message)s',
                     datefmt='%m/%d/%Y %I:%M:%S%p')
@@ -23,6 +24,25 @@ def create_dir_structure():
             "Failed to create directory {} for 5e CLI", CHAR_SAVE_PATH)
         raise e
 
+def create_config_file(
+        config_dir: str = SAVE_PATH, 
+        config_file: str = "default_config.ini"
+        ):
+    """
+    Copies the file config_file to the user's data directory.
+    """
+    # check if config_dir exists else raise error.
+    if not os.path.isdir(config_dir):
+        raise FileNotFoundError(
+            "Config directory {} does not exist.".format(config_dir))
+
+    try:
+        shutil.copy2(config_file, config_dir)
+    except (FileExistsError, FileNotFoundError) as e:
+        LOGGER.warning(
+            "Failed to create config file {} for 5e CLI", config_file)
+        raise e
+    
 
 def check_if_char_exists(char_save_file):
     """

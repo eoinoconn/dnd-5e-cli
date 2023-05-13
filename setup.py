@@ -1,5 +1,13 @@
 import setuptools
 
+from src.char.character.utils import create_dir_structure, create_config_file, SAVE_PATH
+
+# establish data directory.
+create_dir_structure()
+
+# create config file.
+create_config_file(SAVE_PATH, "config/default_config.yaml")
+
 setuptools.setup(
     name="dnd-5e-cli",
     version="0.0.1",
@@ -16,6 +24,6 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     package_dir={"": "src"},
-    packages=setuptools.find_packages(where="src"),
+    packages=setuptools.find_packages(where="./src"),
     python_requires=">=3.6",
 )

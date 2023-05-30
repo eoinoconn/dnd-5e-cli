@@ -3,6 +3,7 @@ import logging
 from pathlib import Path
 import regex as re
 import shutil
+import json
 
 logging.basicConfig(format='%(asctime)s %(message)s',
                     datefmt='%m/%d/%Y %I:%M:%S%p')
@@ -11,6 +12,12 @@ LOGGER.setLevel(logging.DEBUG)
 
 SAVE_PATH = os.path.join(str(Path.home()), ".5e_cli")
 CHAR_SAVE_PATH = os.path.join(SAVE_PATH, "chars")
+
+def get_config_path() -> str:
+    """
+    Returns the path to the config file.
+    """
+    return os.path.join(SAVE_PATH, "default_config.yaml")
 
 def create_dir_structure():
     """
@@ -26,7 +33,7 @@ def create_dir_structure():
 
 def create_config_file(
         config_dir: str = SAVE_PATH, 
-        config_file: str = "default_config.ini"
+        config_file: str = "default_config.yaml"
         ):
     """
     Copies the file config_file to the user's data directory.
@@ -106,3 +113,21 @@ def get_char_save_files(save_dir: str = CHAR_SAVE_PATH):
         list: List of character save files.
     """
     return [os.path.join(save_dir, f) for f in os.listdir(save_dir) if os.path.isfile(os.path.join(save_dir, f))]
+
+def list_char_names(save_dir: str = CHAR_SAVE_PATH):
+    """
+    Returns a list of all character names in the given directory.
+
+    Args:
+        save_dir (str): Directory to search for character save files.
+
+    Returns:
+        list: List of character names.
+    """
+    char_names = []
+    for f in get_char_save_files(save_dir):
+        with open(f, "r") as char_file:
+            char =json.load(char_file)
+            char_names.append(char["name"])
+
+    return char_names

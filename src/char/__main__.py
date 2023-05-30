@@ -6,6 +6,7 @@ import logging
 from .character.create import configure_parser_create
 from .character.list import configure_parser_list
 from .character.utils import create_dir_structure
+from .character.select import select_character
 
 logging.basicConfig(format='%(asctime)s %(message)s',
                     datefmt='%m/%d/%Y %I:%M:%S %p')
@@ -36,18 +37,30 @@ def main():
         help=SUPPRESS,
     )
 
+    # if select is specified run the select command.
+    parser.add_argument(
+        "--select",
+        type=str,
+        default=None,
+        help="Select a character to use.",
+    )
+
     sub_parsers = parser.add_subparsers(
         metavar='command',
         dest='cmd',
     )
 
-    sub_parsers.required = True
+    sub_parsers.required = False
 
     configure_parser_create(sub_parsers)
     configure_parser_list(sub_parsers)
 
     args = parser.parse_args()
-    args.func(args)
+    if args.select:
+        select_character(args)
+    if  hasattr(args, "func"):
+        args.func(args)
+    return
 
 
 if __name__ == "__main__":

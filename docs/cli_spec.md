@@ -50,7 +50,7 @@ $ roll 2d6 4d17
 
 Command for character creation, management and interaction. Each haracter is stored in a local file and can be accessed by name. The character files are located in `~/.char/`.
 
-### Create, list and delete commands
+### Create, list, select and delete commands
 
 #### Examples
 
@@ -82,6 +82,21 @@ Character   Class  Level
 Gandalf     Wizard  10
 Gimli       Dwarf   10
 Legolas     Elf     10
+```
+
+Select a character to interact with.
+
+```bash
+$ char select Gandalf
+Selected char: Gandalf
+Hit points: 100
+```
+
+If character does not exist, suggest creating it.
+
+```bash
+$ char select Aragorn
+Character Aragorn does not exist. Create it using 'char create'
 ```
 
 Delete a character.

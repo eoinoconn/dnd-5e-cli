@@ -1,6 +1,7 @@
-termcolor
-pylint
-pytest
-pytest-cov
-PyInquirer
-regex
+termcolor==2.1.1
+pylint==2.15.9
+pytest==7.2.0
+pytest-cov==4.0.0
+PyInquirer==1.0.3
+regex==2022.10.31
+PyYaml===6.0

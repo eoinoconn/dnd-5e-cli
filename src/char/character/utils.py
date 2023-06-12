@@ -1,7 +1,7 @@
 import os
 import logging
 from pathlib import Path
-import regex as re
+import re
 import shutil
 import json
 
@@ -25,10 +25,10 @@ def create_dir_structure():
     """
     try:
         if not os.path.isdir(CHAR_SAVE_PATH):
-            os.mkdir(CHAR_SAVE_PATH)
+            os.makedirs(CHAR_SAVE_PATH)
     except (FileExistsError, FileNotFoundError) as e:
         LOGGER.warning(
-            "Failed to create directory {} for 5e CLI", CHAR_SAVE_PATH)
+            f"Failed to create directory {str(CHAR_SAVE_PATH)} for 5e CLI")
         raise e
 
 def create_config_file(

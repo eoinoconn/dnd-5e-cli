@@ -5,6 +5,7 @@ import json
 import os
 
 from char.character.character import CharacterFactory
+from char.config import AppConfig as cfg
 
 # Test character representation
 TEST_CHAR_JSON = {
@@ -36,15 +37,15 @@ class TestCharacterFactory(TestCase):
     def test_create_char(self):
 
         with tempfile.TemporaryDirectory() as temp_dir:
-            with patch('char.character.character.CHAR_SAVE_PATH', temp_dir):
-                char = CharacterFactory.create_char(
-                    TEST_CHAR_JSON['name'],
-                    TEST_CHAR_JSON['race'],
-                    TEST_CHAR_JSON['cls']
-                )
+            cfg.CHAR_SAVE_PATH = temp_dir
+            char = CharacterFactory.create_char(
+                TEST_CHAR_JSON['name'],
+                TEST_CHAR_JSON['race'],
+                TEST_CHAR_JSON['cls']
+            )
 
-                self.assertTrue(os.path.exists(os.path.join(
-                    temp_dir, TEST_CHAR_JSON['name'] + ".json")))
+            self.assertTrue(os.path.exists(os.path.join(
+                temp_dir, TEST_CHAR_JSON['name'] + ".json")))
 
         self.assertEqual(str(char), TEST_CHAR_JSON["name"])
         self.assertEqual(char.race, TEST_CHAR_JSON['race'])
@@ -93,8 +94,8 @@ class TestCharacterFactory(TestCase):
             TEST_CHAR_JSON['cls']]
 
         with tempfile.TemporaryDirectory() as temp_dir:
-            with patch('char.character.character.CHAR_SAVE_PATH', temp_dir):
-                char = CharacterFactory.create_char(*args)
+            cfg.CHAR_SAVE_PATH = temp_dir
+            _ = CharacterFactory.create_char(*args)
 
-                self.assertRaises(
-                    ValueError, CharacterFactory.create_char, *args)
+            self.assertRaises(
+                ValueError, CharacterFactory.create_char, *args)

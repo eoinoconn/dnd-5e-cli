@@ -3,7 +3,9 @@ import argparse
 import yaml
 from textwrap import dedent
 
-from .utils import list_char_names, get_config_path, CHAR_SAVE_PATH
+from char.config import AppConfig as cfg
+
+from .utils import list_char_names, get_config_path
 
 def write_character_selection(name: str, config_path: str) -> None:
     """
@@ -23,11 +25,11 @@ def write_character_selection(name: str, config_path: str) -> None:
 def select_character(args: argparse.Namespace) -> None:
     """Select a character to use."""
 
-    char_names = [name.lower() for name in list_char_names(save_dir=CHAR_SAVE_PATH)]
+    char_names = [name.lower() for name in list_char_names(save_dir=cfg.CHAR_SAVE_PATH)]
 
     if args.select.lower() in char_names:
         print(f"Selecting character: {args.select}")
-        write_character_selection(args.select.lower(), get_config_path())
+        write_character_selection(args.select.lower(), get_config_path(cfg))
 
     else:
         print(f"Character: {args.select} does not exist.")

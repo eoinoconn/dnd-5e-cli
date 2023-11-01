@@ -5,34 +5,33 @@ import re
 import shutil
 import json
 
+from char.config import AppConfig as cfg
+
 logging.basicConfig(format='%(asctime)s %(message)s',
                     datefmt='%m/%d/%Y %I:%M:%S%p')
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(logging.DEBUG)
 
-SAVE_PATH = os.path.join(str(Path.home()), ".5e_cli")
-CHAR_SAVE_PATH = os.path.join(SAVE_PATH, "chars")
-
-def get_config_path() -> str:
+def get_config_path(config) -> str:
     """
     Returns the path to the config file.
     """
-    return os.path.join(SAVE_PATH, "default_config.yaml")
+    return os.path.join(config.SAVE_PATH, "default_config.yaml")
 
-def create_dir_structure():
+def create_dir_structure(config):
     """
     Creates fodler necessary for cli character saving.
     """
     try:
-        if not os.path.isdir(CHAR_SAVE_PATH):
-            os.makedirs(CHAR_SAVE_PATH)
+        if not os.path.isdir(config.CHAR_SAVE_PATH):
+            os.makedirs(config.CHAR_SAVE_PATH)
     except (FileExistsError, FileNotFoundError) as e:
         LOGGER.warning(
-            f"Failed to create directory {str(CHAR_SAVE_PATH)} for 5e CLI")
+            f"Failed to create directory {str(config.CHAR_SAVE_PATH)} for 5e CLI")
         raise e
 
 def create_config_file(
-        config_dir: str = SAVE_PATH, 
+        config_dir: str = cfg.SAVE_PATH, 
         config_file: str = "default_config.yaml"
         ):
     """
@@ -41,15 +40,14 @@ def create_config_file(
     # check if config_dir exists else raise error.
     if not os.path.isdir(config_dir):
         raise FileNotFoundError(
-            "Config directory {} does not exist.".format(config_dir))
+            "Config directory {config_dir} does not exist.")
 
     try:
         shutil.copy2(config_file, config_dir)
     except (FileExistsError, FileNotFoundError) as e:
         LOGGER.warning(
-            "Failed to create config file {} for 5e CLI", config_file)
+            "Failed to create config file %s for 5e CLI", config_file)
         raise e
-    
 
 def check_if_char_exists(char_save_file):
     """
@@ -102,7 +100,7 @@ def get_char_save_file_name(save_dir, char_name):
     return os.path.join(save_dir, char_name.replace(" ", "_")) + ".json"
 
 
-def get_char_save_files(save_dir: str = CHAR_SAVE_PATH):
+def get_char_save_files(save_dir: str = cfg.CHAR_SAVE_PATH):
     """
     Returns a list of all character save files in the given directory.
 
@@ -114,7 +112,7 @@ def get_char_save_files(save_dir: str = CHAR_SAVE_PATH):
     """
     return [os.path.join(save_dir, f) for f in os.listdir(save_dir) if os.path.isfile(os.path.join(save_dir, f))]
 
-def list_char_names(save_dir: str = CHAR_SAVE_PATH):
+def list_char_names(save_dir: str = cfg.CHAR_SAVE_PATH):
     """
     Returns a list of all character names in the given directory.
 

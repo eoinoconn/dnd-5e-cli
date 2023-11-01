@@ -5,9 +5,9 @@ import json
 import os
 
 from char import fifth_edition
+from char.config import AppConfig as cfg
 from .utils import (
-    CHAR_SAVE_PATH, check_char_name,
-    check_if_char_exists, get_char_save_file_name)
+    check_char_name, check_if_char_exists, get_char_save_file_name)
 
 class Character:
 
@@ -236,6 +236,6 @@ class CharacterFactory:
 
         # TODO: Choose proficiences
 
-        char.save(CHAR_SAVE_PATH)
+        char.save(cfg.CHAR_SAVE_PATH)
 
         return char

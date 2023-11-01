@@ -1,8 +1,6 @@
 import os
 import logging
-from pathlib import Path
 import re
-import shutil
 import json
 
 from char.config import AppConfig as cfg
@@ -17,37 +15,6 @@ def get_config_path(config) -> str:
     Returns the path to the config file.
     """
     return os.path.join(config.SAVE_PATH, "default_config.yaml")
-
-def create_dir_structure(config):
-    """
-    Creates fodler necessary for cli character saving.
-    """
-    try:
-        if not os.path.isdir(config.CHAR_SAVE_PATH):
-            os.makedirs(config.CHAR_SAVE_PATH)
-    except (FileExistsError, FileNotFoundError) as e:
-        LOGGER.warning(
-            f"Failed to create directory {str(config.CHAR_SAVE_PATH)} for 5e CLI")
-        raise e
-
-def create_config_file(
-        config_dir: str = cfg.SAVE_PATH, 
-        config_file: str = "default_config.yaml"
-        ):
-    """
-    Copies the file config_file to the user's data directory.
-    """
-    # check if config_dir exists else raise error.
-    if not os.path.isdir(config_dir):
-        raise FileNotFoundError(
-            "Config directory {config_dir} does not exist.")
-
-    try:
-        shutil.copy2(config_file, config_dir)
-    except (FileExistsError, FileNotFoundError) as e:
-        LOGGER.warning(
-            "Failed to create config file %s for 5e CLI", config_file)
-        raise e
 
 def check_if_char_exists(char_save_file):
     """

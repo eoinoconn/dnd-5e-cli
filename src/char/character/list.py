@@ -3,15 +3,15 @@ import argparse
 import logging
 import json
 
-from char.character.utils import get_char_save_files, CHAR_SAVE_PATH
-
+from char.character.utils import get_char_save_files
+from char.config import AppConfig as cfg
 
 def main(args: argparse.Namespace):
     """List characters."""
     logging.debug('List characters.')
     print('List characters.')
 
-    char_files = get_char_save_files(CHAR_SAVE_PATH)
+    char_files = get_char_save_files(cfg.CHAR_SAVE_PATH)
     if not char_files:
         print("No characters found.")
         return

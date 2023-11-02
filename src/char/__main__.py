@@ -5,7 +5,6 @@ import logging
 #from .. import __version__
 from .character.create import configure_parser_create
 from .character.list import configure_parser_list
-from .character.utils import create_dir_structure
 from .character.select import select_character
 
 logging.basicConfig(format='%(asctime)s %(message)s',
@@ -15,9 +14,6 @@ LOGGER.setLevel(logging.DEBUG)
 
 
 def main():
-
-    # establish configuration directory.
-    create_dir_structure()
 
     parser = argparse.ArgumentParser(
         allow_abbrev=False,

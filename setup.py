@@ -3,7 +3,8 @@ import os
 import shutil
 import setuptools
 
-from src.char.config import AppConfig as cfg
+from src.char.config import get_app_config
+cfg = get_app_config()
 
 logging.basicConfig(format='%(asctime)s %(message)s',
                     datefmt='%m/%d/%Y %I:%M:%S %p')

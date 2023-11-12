@@ -3,18 +3,14 @@ import logging
 import re
 import json
 
-from char.config import AppConfig as cfg
+from char.config import get_app_config
+
+cfg = get_app_config()
 
 logging.basicConfig(format='%(asctime)s %(message)s',
                     datefmt='%m/%d/%Y %I:%M:%S%p')
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(logging.DEBUG)
-
-def get_config_path(config) -> str:
-    """
-    Returns the path to the config file.
-    """
-    return os.path.join(config.SAVE_PATH, "default_config.yaml")
 
 def check_if_char_exists(char_save_file):
     """

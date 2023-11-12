@@ -2,13 +2,13 @@
 Character class.
 """
 import json
-import os
 
 from char import fifth_edition
-from char.config import AppConfig as cfg
+from char.config import get_app_config
 from .utils import (
     check_char_name, check_if_char_exists, get_char_save_file_name)
 
+cfg = get_app_config()
 class Character:
 
     def __init__(self, name):

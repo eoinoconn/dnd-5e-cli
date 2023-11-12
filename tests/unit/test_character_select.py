@@ -1,18 +1,25 @@
+import json
 import os
 import yaml
 import tempfile
 import unittest
 import argparse
-import json
-from unittest.mock import patch, mock_open
-from char.character.select import select_character, write_character_selection, list_char_names, get_config_path
+
+from unittest.mock import patch
+from char.character.select import select_character
 
 
-class TestWriteCharacterSelection(unittest.TestCase):
+class TestSelectCharacter(unittest.TestCase):
     def setUp(self):
-        # create a temporary YAML file for testing
-        self.config_file = tempfile.NamedTemporaryFile(delete=False, suffix=".yaml")
-        self.config_path = self.config_file.name
+        # create a temporary directory for testing
+        self.temp_dir = tempfile.TemporaryDirectory()
+        self.temp_path = self.temp_dir.name
+
+        # create a temporary YAML file in the temporary directory for testing
+        self.config_path = os.path.join(self.temp_path, "default_config.yaml")
+
+        # create a subdirectory for character files
+        os.mkdir(os.path.join(self.temp_path, "chars"))
 
         # copy the contents of the example file to the temporary file
         with open("config/default_config.yaml", "r") as example_file:
@@ -23,42 +30,69 @@ class TestWriteCharacterSelection(unittest.TestCase):
         # delete the temporary file after testing
         os.remove(self.config_path)
 
-    def test_writes_selected_character_to_config_file(self):
+    # patch the config path to point to the temporary file
+    @patch("char.character.select.cfg.get_config_path")
+    def test_selects_existing_character(self, mock_config_path):
         # arrange
-        name = "Mario"
+        args = argparse.Namespace(select="mario")
+        # create character json
+        char_path = os.path.join(self.temp_path, "chars", "mario.json")
+        with open(char_path, "w") as char_file:
+            json.dump( {"name": "mario"}, char_file)
+
+        # set the config path to the temporary file
+        mock_config_path.return_value = self.config_path
 
         # act
-        write_character_selection(name, self.config_path)
+        select_character(args, os.path.join(self.temp_path, "chars"))
 
         # assert
         with open(self.config_path, "r") as config_file:
             config = yaml.safe_load(config_file)
-            self.assertEqual(config["selected_character"], name)
+            self.assertEqual(config["selected_character"], "mario")
 
-    def test_overwrites_existing_selected_character_in_config_file(self):
+    def test_does_not_select_nonexistent_character(self):
         # arrange
-        name1 = "Mario"
-        name2 = "Luigi"
-        config = {"selected_character": name1}
-        with open(self.config_path, "w") as config_file:
-            yaml.safe_dump(config, config_file)
+        args = argparse.Namespace(select="nonexistent")
 
         # act
-        write_character_selection(name2, self.config_path)
+        select_character(args)
 
         # assert
         with open(self.config_path, "r") as config_file:
             config = yaml.safe_load(config_file)
-            self.assertEqual(config["selected_character"], name2)
+            self.assertNotEqual(config["selected_character"], "nonexistent")
 
-    def test_raises_exception_when_config_file_does_not_exist(self):
+    @patch("char.character.select.cfg.get_config_path")
+    def test_select_character_with_different_case(self, mock_config_path):
         # arrange
-        name = "Mario"
-        config_path = "nonexistent_file.yaml"
+        args = argparse.Namespace(select="Mario")
+        # create character json
+        char_path = os.path.join(self.temp_path, "chars", "mario.json")
+        with open(char_path, "w") as char_file:
+            json.dump( {"name": "mario"}, char_file)
 
-        # act/assert
-        with self.assertRaises(FileNotFoundError):
-            write_character_selection(name, config_path)
+        # set the config path to the temporary file
+        mock_config_path.return_value = self.config_path
+
+        # act
+        select_character(args, os.path.join(self.temp_path, "chars"))
+
+        # assert
+        with open(self.config_path, "r") as config_file:
+            config = yaml.safe_load(config_file)
+            self.assertEqual(config["selected_character"], "mario")
+
+    def test_prints_error_message_for_nonexistent_character(self):
+        # arrange
+        args = argparse.Namespace(select="nonexistent")
+
+        # act
+        with patch("builtins.print") as mock_print:
+            select_character(args)
+
+        # assert
+        mock_print.assert_called_with("Create it using 'char create nonexistent'")
 
 if __name__ == '__main__':
     unittest.main()

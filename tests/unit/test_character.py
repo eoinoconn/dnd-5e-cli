@@ -2,8 +2,9 @@ import os
 import tempfile
 import unittest
 from char.character.character import CharacterFactory
-from char.config import AppConfig as cfg
+from char.config import get_app_config
 
+cfg = get_app_config()
 
 class TestWriteCharacterFactory(unittest.TestCase):
     def setUp(self):
